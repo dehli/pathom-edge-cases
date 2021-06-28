@@ -1,0 +1,5 @@
+{:deps {com.wsscode/pathom {:mvn/version "2.3.1"}
+        org.clojure/clojure {:mvn/version "1.10.1"}
+        org.clojure/clojurescript {:mvn/version "1.10.773"}
+        org.clojure/core.async {:mvn/version "1.3.610"}}
+ :paths ["src"]}
