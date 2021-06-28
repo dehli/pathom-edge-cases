@@ -9,7 +9,7 @@
 
 (pc/defresolver state
   [{:keys [parser] :as env} {id :my/id}]
-  {::pc/output [:my/id :my/state]}
+  {::pc/output [:my/state]}
   (go
     (let [ident [:my/id id]
           state (atom [])]
