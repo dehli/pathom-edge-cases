@@ -7,10 +7,9 @@
   [{id :my/id}]
   {:my/other-key (str "hello, " id)})
 
-(pc/defmutation my-mutation
+(pc/defresolver state
   [{:keys [parser] :as env} {id :my/id}]
-  {::pc/sym 'my/mutation
-   ::pc/output [:my/id :my/state]}
+  {::pc/output [:my/id :my/state]}
   (go
     (let [ident [:my/id id]
           state (atom [])]
@@ -18,8 +17,7 @@
       ;; If you add :my/id to 1st query, the 2nd will work.
       (swap! state conj (<! (parser env [{ident [:my/other-key]}])))
       (swap! state conj (<! (parser env [{ident [:my/id]}])))
-      {:my/id id
-       :my/state (mapv #(get % ident) @state)})))
+      {:my/state (mapv #(get % ident) @state)})))
 
 (def parser
   (p/parallel-parser
@@ -28,18 +26,15 @@
                                             pc/open-ident-reader
                                             p/env-placeholder-reader]
                   ::p/placeholder-prefixes #{">"}}
-     ::p/mutate  pc/mutate-async
-     ::p/plugins [(pc/connect-plugin {::pc/register [my-mutation
+     ::p/plugins [(pc/connect-plugin {::pc/register [state
                                                      other-key]})
                   p/error-handler-plugin
                   p/trace-plugin]}))
 
 (comment
   (go
-    (prn (<! (parser {} `[(my/mutation {:my/id "foo"})]))))
+    (prn (<! (parser {} [{[:my/id "foo"] [:my/state]}]))))
   ;;
-  ;; #:my{mutation #:my{:state [#:my{:other-key "hello, foo"}
-  ;;                            #:my{:id :com.wsscode.pathom.core/not-found}]
-  ;;      :id "foo"}}
-  ;;
+  ;; {[:my/id "foo"] #:my{:state [#:my{:other-key "hello, foo"}
+  ;;                              #:my{:id :com.wsscode.pathom.core/not-found}]}}
   )
