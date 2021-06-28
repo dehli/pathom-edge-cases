@@ -35,6 +35,7 @@
   (go
     (prn (<! (parser {} [{[:my/id "foo"] [:my/state]}]))))
   ;;
-  ;; {[:my/id "foo"] #:my{:state [#:my{:other-key "hello, foo"}
-  ;;                              #:my{:id :com.wsscode.pathom.core/not-found}]}}
+  ;; {[:my/id "foo"]
+  ;;  {:my/state [{:my/other-key "hello, foo"}
+  ;;              {:my/id ::p/not-found}]}}
   )
