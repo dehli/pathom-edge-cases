@@ -15,9 +15,7 @@
   [{:keys [parser] :as env} {id :id}]
   {::pc/output [:state]}
   (go
-    (let [state (atom nil)]
-      (reset! state (<! (parser (with-entity env {:id id}) [:one])))
-      {:state @state})))
+    {:state (<! (parser (with-entity env {:id id}) [:one]))}))
 
 (def parser
   (p/parallel-parser
