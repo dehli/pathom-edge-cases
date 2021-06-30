@@ -1,7 +1,8 @@
 (ns dev.dehli.pathom-bug
   (:require [clojure.core.async :refer [go <! <!!]]
             [com.wsscode.pathom.core :as p]
-            [com.wsscode.pathom.connect :as pc]))
+            [com.wsscode.pathom.connect :as pc]
+            [com.wsscode.pathom.parser :as pp]))
 
 (defn with-entity [env ent]
   (assoc env ::p/entity (atom ent)))
@@ -24,7 +25,8 @@
                                             pc/parallel-reader
                                             pc/open-ident-reader
                                             p/env-placeholder-reader]
-                  ::p/placeholder-prefixes #{">"}}
+                  ::p/placeholder-prefixes #{">"}
+                  ::pp/external-wait-ignore-timeout 100}
      ::p/plugins [(pc/connect-plugin {::pc/register [state
                                                      one]})
                   p/error-handler-plugin
