@@ -6,21 +6,19 @@
 
 (def nodes
   {0 {:node/name "node zero"
-      :node/children [{:node/id 1}]}
+      :node/children [{:node/id 1}]
+      :node/parent nil}
 
    1 {:node/name "node one"
-      :node/children []}})
+      :node/children []
+      :node/parent {:node/id 0}}})
 
 (pco/defresolver node
   [{id :node/id}]
   {::pco/output [{:node/children [:node/id]}
+                 {:node/parent [:node/id]}
                  :node/name]}
   (get nodes id))
-
-(pco/defresolver parent
-  [{id :node/id}]
-  {::pco/output [{:node/parent [:node/id]}]}
-  {:node/parent (when (= id 1) {:node/id 0})})
 
 (pco/defresolver index
   [{:node/keys [id parent]}]
@@ -30,7 +28,7 @@
                                #(= id (:node/id %)))})
 
 (def env
-  (pci/register [node index parent]))
+  (pci/register [node index]))
 
 (comment
   (p.eql/process env {:node/id 1} [:node/index :node/parent])
@@ -38,7 +36,8 @@
   ;; {:node/index 0
   ;;  :node/parent {:node/id 0
   ;;                :node/name "node zero"
-  ;;                :node/children [{:node/id 1}]}}
+  ;;                :node/children [{:node/id 1}]
+  ;;                :node/parent nil}}
 
   (p.eql/process env {:node/id 1} [:node/parent])
   ;; =>
