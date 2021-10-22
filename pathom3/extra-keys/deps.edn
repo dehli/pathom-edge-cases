@@ -1,0 +1,5 @@
+{:deps {com.wsscode/pathom3 {:mvn/version "2021.10.20-alpha"}
+        metosin/potpuri {:mvn/version "0.4.0"}
+        org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/clojurescript {:mvn/version "1.10.879"}}
+ :paths ["src/main"]}
