@@ -1,4 +1,4 @@
-(ns src.dev.dehli.pathom3.extra-keys
+(ns dev.dehli.pathom3.extra-keys
   (:require [com.wsscode.pathom3.connect.indexes :as pci]
             [com.wsscode.pathom3.connect.operation :as pco]
             [com.wsscode.pathom3.interface.eql :as p.eql]
