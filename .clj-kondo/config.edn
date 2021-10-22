@@ -1,2 +1,7 @@
-{:lint-as {com.wsscode.pathom.connect/defresolver clojure.core/defn
-           com.wsscode.pathom.connect/defmutation clojure.core/defn}}
+{:lint-as {;; Pathom2 Configuration
+           com.wsscode.pathom.connect/defresolver clojure.core/defn
+           com.wsscode.pathom.connect/defmutation clojure.core/defn
+
+           ;; Pathom3 Configuration
+           com.wsscode.pathom3.connect.operation/defresolver clojure.core/defn
+           com.wsscode.pathom3.connect.operation/defmutation clojure.core/defn}}
