@@ -1,0 +1,4 @@
+{:deps {com.wsscode/pathom3 {:mvn/version "2022.01.28-alpha"}
+        org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/clojurescript {:mvn/version "1.11.4"}}
+ :paths ["main/src"]}
