@@ -1,0 +1,5 @@
+{:deps {com.wsscode/pathom3 {:git/url "git@github.com:wilkerlucio/pathom3.git"
+                             :sha "8a3d7e1d0024b689614afc1f3d5bee8380627ba6"}
+        org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/clojurescript {:mvn/version "1.11.4"}}
+ :paths ["main/src"]}
