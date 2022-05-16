@@ -21,6 +21,5 @@
 (comment
   (p.eql/process-one env {:in "a"} (pco/? :out)) ;; => "A"
   (p.eql/process-one env {:in "b"} (pco/? :out)) ;; => "B"
-  (p.eql/process-one env {:in "c"} (pco/? :out)) ;; => All paths from an OR node failed.
-
+  (p.eql/process-one env {:in "c"} (pco/? :out)) ;; => All paths from an OR node failed. Expected: {:out {}}
   )
