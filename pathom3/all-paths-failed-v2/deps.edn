@@ -1,0 +1,8 @@
+{:deps {com.wsscode/pathom3 {:git/url "git@github.com:wilkerlucio/pathom3.git"
+                             :sha "f0984db45ac829e3d233ef82a8812e9d65acb490"}
+        org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/clojurescript {:mvn/version "1.11.54"}}
+ :paths ["main/src"]
+ :aliases {:outdated
+           {:extra-deps {com.github.liquidz/antq {:mvn/version "1.6.2"}}
+            :main-opts ["-m" "antq.core"]}}}
