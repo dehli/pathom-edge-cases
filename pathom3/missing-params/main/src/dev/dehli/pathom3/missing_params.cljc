@@ -4,12 +4,8 @@
             [com.wsscode.pathom3.interface.async.eql :as p.a.eql]
             [promesa.core :as p]))
 
-(defn- text-format? [env]
-  (= (:format (pco/params env))
-     :text))
-
 (pco/defresolver email-body [env _]
-  {:email/body (if (text-format? env)
+  {:email/body (if (:text? (pco/params env))
                  "Hello there"
                  "<h1>Hello there</h1>")})
 
@@ -33,7 +29,7 @@
       (process [:email/body
                 :email/valid?])
 
-      (process `[(:email/body {:format :text})
+      (process `[(:email/body {:text? true})
                  :email/valid?])))
 
   ;; Clojure
